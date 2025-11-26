@@ -1,0 +1,49 @@
+@startuml
+
+class Cliente{
+- nombre: String
+- cedula: String
+- numerodeTelefono: String
+
++consultarSaldoporTipodeCuenta()
+}
+
+class Cuenta{
+# numeroDeCuenta: String
+# saldo: double
+
+depositarDinero()
+retirarDiniero()
+}
+
+class CuentaAhorros{
+- interesAnual: double = 5%
+- saldoMinimoO: double = 50
++ retirar(double monto) boolean
++ aplicarInteres()
+}
+class CuentaCorriente{
+- limiteDeSobregiro: double = 500
++ retirar(double monto) boolean
+}
+class Banco{
+
+}
+class AppBanco{
+
+} 
+class Transaccion{
+- fecha: Date
+- monto: double
+- tipo: String
+}
+
+Banco "1" o-- "*" Cliente
+Banco "1" *-- "*" Cuenta
+AppBanco -- Banco
+Cliente "1" *-- "*" Cuenta
+Cuenta "1" *-- "*" Transaccion
+
+Cuenta <|-- CuentaAhorros
+Cuenta <|-- CuentaCorriente
+@enduml
